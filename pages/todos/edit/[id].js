@@ -1,11 +1,22 @@
 // pages/todos/edit/[id].jsx
-import { getTodoById} from "../../../lib/store";
+import { getTodoById } from "../../../lib/store";
 import TodoForm from "../../components/TodoForm";
 
 export async function getServerSideProps({ params }) {
-  const todo = getTodoById(params.id);
+  const todo = await getTodoById(params.id); 
   if (!todo) return { notFound: true };
-  return { props: { todo } };
+  
+  // Ensure the object is plain JSON
+  return {
+    props: { 
+      todo: {
+        id: todo.id,
+        title: todo.title,
+        completed: todo.completed,
+        tag: todo.tag || ""
+      }
+    }
+  };
 }
 
 export default function EditTodoPage({ todo }) {

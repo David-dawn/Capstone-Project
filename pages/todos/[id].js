@@ -1,10 +1,24 @@
+// pages/todos/[id].jsx
 import { getTodoById } from "../../lib/store";
 import Link from "next/link";
 
 export async function getServerSideProps({ params }) {
-  const todo = getTodoById(params.id);
+  // Await Firestore fetch
+  const todo = await getTodoById(params.id);
+
   if (!todo) return { notFound: true };
-  return { props: { todo } };
+
+  // Serialize only plain JSON values
+  return {
+    props: {
+      todo: {
+        id: todo.id,
+        title: todo.title,
+        completed: todo.completed,
+        tag: todo.tag || "",
+      },
+    },
+  };
 }
 
 export default function ViewTodo({ todo }) {
@@ -21,24 +35,15 @@ export default function ViewTodo({ todo }) {
           </span>
         )}
 
-        <p
-          className={`mt-4 text-lg font-semibold ${
-            todo.completed
-              ? "text-green-700 dark:text-green-300"
-              : "text-yellow-700 dark:text-yellow-300"
-          }`}
-        >
+        <p className={`mt-4 text-lg font-semibold ${todo.completed ? "text-green-700 dark:text-green-300" : "text-yellow-700 dark:text-yellow-300"}`}>
           Status: {todo.completed ? "Completed ✅" : "Pending ⏳"}
         </p>
 
         <div className="mt-6 flex gap-4">
-          <Link
-            href="/"
-            className="btn-ghost text-purple-700 dark:text-purple-300"
-          >
+          <Link href="/" className="btn-ghost text-purple-700 dark:text-purple-300">
             ← Back to List
           </Link>
-          <Link href={`/edit/${todo.id}`} className="btn-primary">
+          <Link href={`/todos/edit/${todo.id}`} className="btn-primary">
             Edit Task
           </Link>
         </div>

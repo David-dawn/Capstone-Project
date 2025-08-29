@@ -8,7 +8,7 @@ export default function TodoList({ initialTodos = [] }) {
   const [todos, setTodos] = useState(initialTodos);
   const [loading, setLoading] = useState(initialTodos.length === 0);
 
-  // Fetch latest todos from API
+  
   const loadTodos = async () => {
     try {
       setLoading(true);
@@ -34,7 +34,7 @@ export default function TodoList({ initialTodos = [] }) {
     setTodos(prev.filter((t) => t.id !== id));
     const res = await fetch(`/api/todos/${id}`, { method: 'DELETE' });
     if (!res.ok && res.status !== 204) {
-      setTodos(prev); // revert if delete fails
+      setTodos(prev);
       alert('Failed to delete.');
     }
   };

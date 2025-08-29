@@ -1,25 +1,23 @@
-// pages/api/todos/[id].js
-import { getTodoById, updateTodo, deleteTodo } from '../../../lib/store';
+import { getTodoById, updateTodo, deleteTodo } from "../../../lib/store";
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   const { id } = req.query;
 
-  if (req.method === 'GET') {
-    const todo = getTodoById(id);
-    if (!todo) return res.status(404).json({ message: 'Not found' });
+  if (req.method === "GET") {
+    const todo = await getTodoById(id);
+    if (!todo) return res.status(404).json({ message: "Not found" });
     return res.status(200).json(todo);
   }
 
-  if (req.method === 'PUT') {
-    const updated = updateTodo(id, req.body);
-    if (!updated) return res.status(404).json({ message: 'Not found' });
-    return res.status(200).json(updated);
+  if (req.method === "PUT") {
+    const todo = await updateTodo(id, req.body);
+    return res.status(200).json(todo);
   }
 
-  if (req.method === 'DELETE') {
-    deleteTodo(id);
+  if (req.method === "DELETE") {
+    await deleteTodo(id);
     return res.status(204).end();
   }
 
-  return res.status(405).json({ message: 'Method not allowed' });
+  res.status(405).end();
 }
