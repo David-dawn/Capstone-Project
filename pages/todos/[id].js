@@ -1,4 +1,5 @@
 import { getTodoById } from "@/lib/store";
+import Link from "next/link";
 
 export async function getServerSideProps({ params }) {
   const todo = getTodoById(params.id);
@@ -31,18 +32,15 @@ export default function ViewTodo({ todo }) {
         </p>
 
         <div className="mt-6 flex gap-4">
-          <a
+          <Link
             href="/"
             className="btn-ghost text-purple-700 dark:text-purple-300"
           >
             ← Back to List
-          </a>
-          <a
-            href={`/edit/${todo.id}`}
-            className="btn-primary"
-          >
+          </Link>
+          <Link href={`/edit/${todo.id}`} className="btn-primary">
             Edit Task
-          </a>
+          </Link>
         </div>
       </div>
     </main>
