@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+
+/* Light mode (default) */
+body {
+  background: linear-gradient(to bottom right, #0c41aa, #0e1b34, #140556); 
+  /* soft gray → lavender */
+  color: #111827; /* gray-900 */
+}
+
+footer {
+  color: #4b5563; /* gray-600 for balance */
+}
+
+button {
+  background-color: #4f46e5; /* indigo-600 */
+  color: white;
+}
+button:hover {
+  background-color: #4338ca; /* indigo-700 */
+}
+
+/* Dark mode (applied when <html class="dark"> is set) */
+html.dark body {
+  background: linear-gradient(to bottom right, #0a0a0a, #111111, #1a1a1a);
+  color: #f9fafb; /* gray-100 */
+}
+
+html.dark footer {
+  color: #9ca3af; /* gray-400 */
+}
+
+html.dark button {
+  background-color: #1f2937; /* gray-800 */
+  color: #f3f4f6; /* gray-100 */
+}
+
+.input {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 0.5rem;
+  background-color: white;
+  color: #111827; /* gray-900 */
+  font-size: 0.95rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  border-color: #7c3aed; /* purple-600 */
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3);
+}
+
+/* Dark mode input fix */
+html.dark .input {
+  background-color: #1f2937; /* gray-800 */
+  border-color: #374151; /* gray-700 */
+  color: #f9fafb; /* gray-100 */
+}
+
+html.dark .input:focus {
+  border-color: #a78bfa; /* purple-400 */
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.4);
+}
+
+
+/* Smooth UI feel */
+* { @apply transition-colors duration-200; }
+
+html, body { height: 100%; }
+
+.glass {
+  @apply bg-white/40 dark:bg-gray-800/40 backdrop-blur-md border border-white/30 dark:border-gray-700/40;
+   position: relative; /* <-- makes sure it doesn’t leak outside */
+  z-index: 0;  
+}
+
+/* Fancy focus ring */
+
+
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2
+         bg-gradient-to-r from-purple-600 to-indigo-600
+         text-white font-semibold px-5 py-2.5 rounded-lg shadow hover:opacity-90;
+}
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2
+         text-purple-700 dark:text-purple-300 font-medium px-3 py-2 rounded-lg hover:bg-purple-50/60 dark:hover:bg-gray-700/60;
+}
+.badge {
+  @apply inline-block text-xs px-2 py-1 rounded bg-purple-200 text-purple-800
+         dark:bg-purple-800 dark:text-white;
+}
+
+/* Container responsiveness */
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem; /* Mobile base padding */
+}
+
+@media (min-width: 640px) { /* sm */
+  .container {
+    max-width: 640px;
+    padding: 1.5rem;
+  }
+}
+@media (min-width: 1024px) { /* lg */
+  .container {
+    max-width: 800px;
+    padding: 2rem;
+  }
+}
+
+/* Todo list items */
+.todo-item {
+  @apply flex items-center justify-between gap-3 
+         px-3 py-2 rounded-lg shadow-sm;
+  background: white;
+}
+
+html.dark .todo-item {
+  background: #1f2937; /* gray-800 */
+}
+
+
+@media (min-width: 640px) {
+  .input {
+    max-width: 400px; /* centered & neat on desktop */
+  }
+}
+
+.btn-primary, .btn-ghost {
+  width: 100%; /* full width on mobile */
+}
+
+@media (min-width: 640px) {
+  .btn-primary, .btn-ghost {
+    width: auto; /* inline on desktop */
+  }
+}
