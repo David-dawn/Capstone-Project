@@ -1,4 +1,4 @@
-import { getTodoById, updateTodo, deleteTodo } from "@/lib/store";
+import { getTodoById, updateTodo, deleteTodo } from "../../../lib/store";
 
 export default function handler(req, res) {
   const { id } = req.query;

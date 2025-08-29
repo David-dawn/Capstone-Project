@@ -1,6 +1,6 @@
 // pages/todos/edit/[id].jsx
-import { getTodoById, updateTodo } from "@/lib/store";
-import TodoForm from "@/pages/components/TodoForm";
+import { getTodoById} from "../../../lib/store";
+import TodoForm from "../../components/TodoForm";
 
 export async function getServerSideProps({ params }) {
   const todo = getTodoById(params.id);

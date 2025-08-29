@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllTodos, addTodo } from "@/lib/store";
+import { getAllTodos, addTodo } from "../../../lib/store";
 
 export async function GET() {
   return NextResponse.json(getAllTodos(), { status: 200 });

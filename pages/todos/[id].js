@@ -1,4 +1,4 @@
-import { getTodoById } from "@/lib/store";
+import { getTodoById } from "../../lib/store";
 import Link from "next/link";
 
 export async function getServerSideProps({ params }) {

@@ -1,5 +1,5 @@
-import { getAllTodos } from '@/lib/store';
-import TodoList from '@/pages/components/TodoList';
+import { getAllTodos } from '../lib/store';
+import TodoList from '../pages/components/TodoList';
 
 
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getTodoById, updateTodo, deleteTodo } from "@/lib/store";
+import { getTodoById, updateTodo, deleteTodo } from "../../../../lib/store";
 
 export async function GET(_req, { params }) {
   const todo = getTodoById(params.id);
